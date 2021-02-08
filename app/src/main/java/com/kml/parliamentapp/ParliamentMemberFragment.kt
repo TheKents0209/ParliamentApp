@@ -13,6 +13,9 @@ class ParliamentMemberFragment : Fragment() {
 
     private var randomMember = members.randomMember()
 
+    //TODO:add touku's eduskunta API for likes
+    var likes = 0
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val binding = DataBindingUtil.inflate<FragmentParliamentMemberBinding>(inflater,
@@ -24,7 +27,29 @@ class ParliamentMemberFragment : Fragment() {
                 invalidateAll()
             }
         }
-        binding.memberFirstNameTV.text = randomMember.firstname
+        binding.firstNameTV.text = randomMember.firstname
+        binding.lastNameTV.text = randomMember.lastname
+        binding.likeAmountTV.text = likes.toString()
+
+        binding.likeButton.setOnClickListener {
+            likes++
+            binding.likeAmountTV.text = likes.toString()
+        }
+        binding.dislikeButton.setOnClickListener {
+            likes--
+            binding.likeAmountTV.text = likes.toString()
+        }
+        binding.randomMemberButton.setOnClickListener {
+            randomMember = members.randomMember()
+            likes = 0
+            randomMember?.let {
+                binding.apply {
+                    member = randomMember
+                    invalidateAll()
+                }
+            }
+            binding.likeAmountTV.text = likes.toString()
+        }
 
         return binding.root
     }
