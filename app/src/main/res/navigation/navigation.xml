@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/titleFragment">
+
+    <fragment
+        android:id="@+id/titleFragment"
+        android:name="com.kml.parliamentapp.TitleFragment"
+        android:label="TitleFragment"
+        tools:layout="@layout/fragment_title"
+        >
+        <action
+            android:id="@+id/action_titleFragment_to_parliamentMemberFragment"
+            app:destination="@id/parliamentMemberFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/parliamentMemberFragment"
+        android:name="com.kml.parliamentapp.ParliamentMemberFragment"
+        android:label="ParliamentMemberFragment"
+        tools:layout="@layout/fragment_parliament_member"/>
+</navigation>
