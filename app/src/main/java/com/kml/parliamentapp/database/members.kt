@@ -1,4 +1,4 @@
-package com.kml.parliamentapp
+package com.kml.parliamentapp.database
 
 data class ParliamentMember(
     val hetekaId: Int,

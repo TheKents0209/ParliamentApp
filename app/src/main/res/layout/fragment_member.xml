@@ -4,14 +4,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="member"
-            type="com.kml.parliamentapp.ParliamentMember" />
+            type="com.kml.parliamentapp.database.ParliamentMember" />
+
+        <variable
+            name="memberViewModel"
+            type="com.kml.parliamentapp.member.MemberViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".member.MemberFragment">
 
         <ImageView
             android:id="@+id/memberIV"
@@ -31,7 +37,7 @@
             android:layout_marginStart="140dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="3dp"
-            android:text="@={member.firstname}"
+            android:text="@{String.valueOf(memberViewModel.firstName)}"
             app:layout_constraintEnd_toStartOf="@+id/lastNameTV"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +50,7 @@
             android:layout_marginStart="3dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="140dp"
-            android:text="@={member.lastname}"
+            android:text="@{String.valueOf(memberViewModel.lastName)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/firstNameTV"
@@ -52,6 +58,7 @@
 
         <Button
             android:id="@+id/dislikeButton"
+            android:onClick="@{() -> memberViewModel.dislike()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -64,6 +71,7 @@
 
         <Button
             android:id="@+id/likeButton"
+            android:onClick="@{() -> memberViewModel.like()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="88dp"
@@ -79,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:text="@={member.party}"
+            android:text="@{String.valueOf(memberViewModel.party)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
@@ -92,7 +100,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="48dp"
             android:layout_marginEnd="8dp"
-            android:text="0"
+            android:text="@{String.valueOf(memberViewModel.likes)}"
             app:layout_constraintEnd_toStartOf="@+id/dislikeButton"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/likeButton"
@@ -100,6 +108,7 @@
 
         <Button
             android:id="@+id/randomMemberButton"
+            android:onClick="@{() -> memberViewModel.randomMember()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="96dp"
