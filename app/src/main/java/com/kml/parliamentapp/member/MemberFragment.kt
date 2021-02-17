@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.kml.parliamentapp.R
+import com.kml.parliamentapp.database.MembersDatabase
 import com.kml.parliamentapp.databinding.FragmentMemberBinding
 
 class MemberFragment : Fragment() {
@@ -22,6 +23,7 @@ class MemberFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        //Inflates binding layout and returns created binding for layout
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_member,
@@ -29,11 +31,19 @@ class MemberFragment : Fragment() {
             false
         )
 
+        val application = requireNotNull(this.activity).application
+        // Create an instance of the ViewModel Factory.
+        val dataSource = MembersDatabase.getInstance(application).membersDatabaseDao
+        val viewModelFactory = MemberViewModelFactory(dataSource, application)
+        // Get a reference to the ViewModel associated with this fragment.
+        val memberViewModel =
+            ViewModelProvider(this, viewModelFactory).get(MemberViewModel::class.java)
+
         Log.i("MemberFragment", "Called ViewModelProvider.get")
 
-        //Get the viewModel
-        viewModel = ViewModelProvider(this).get(MemberViewModel::class.java)
-        binding.memberViewModel = viewModel
+        //Use ViewModel to manage UI
+        binding.memberViewModel = memberViewModel
+        //Sets view as LiveData observer
         binding.lifecycleOwner = viewLifecycleOwner
 
         return binding.root

@@ -1,15 +1,37 @@
 package com.kml.parliamentapp.member
 
+import android.app.Application
+import android.provider.ContactsContract
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.kml.parliamentapp.database.ParliamentMember
-import com.kml.parliamentapp.database.members
+import androidx.lifecycle.*
+import com.kml.parliamentapp.database.*
+import com.kml.parliamentapp.formatMembers
+import com.kml.parliamentapp.network.ParliamentApi
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.lang.Exception
 
-class MemberViewModel : ViewModel() {
+class MemberViewModel(
+    val database: MembersDatabaseDao,
+    application: Application
+) : AndroidViewModel(application) {
 
     var randomMember = members.randomMember()
+
+    private var parliamentMember = MutableLiveData<ParliamentMember?>()
+
+    private val allMembers = database.getAllMembers()
+    val allMemberString = Transformations.map(allMembers) { allMembers ->
+        formatMembers(allMembers, application.resources)
+    }
+
+
+    private val _response = MutableLiveData<String>()
+    val response: LiveData<String>
+        get() = _response
+
 
     private val _likes = MutableLiveData<Int>()
     val likes: LiveData<Int>
@@ -28,6 +50,8 @@ class MemberViewModel : ViewModel() {
         get() = _party
 
     init {
+        initializeParliamentMember()
+//        getEduskuntaMembers()
         _likes.value = 0
         _firstName.value = randomMember.firstname
         _lastName.value = randomMember.lastname
@@ -35,9 +59,18 @@ class MemberViewModel : ViewModel() {
         Log.i("MemberViewModel", "MemberViewModel created!")
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        Log.i("MemberViewModel", "MemberViewModel destroyed!")
+    private fun initializeParliamentMember() {
+        viewModelScope.launch {
+            parliamentMember.value = getRandomMemberFromDatabase()
+        }
+    }
+
+    private suspend fun getRandomMemberFromDatabase(): ParliamentMember? {
+        var randomMember = database.getRandomMember()
+        if (randomMember?.firstname.isNullOrEmpty()) {
+            randomMember = null
+        }
+        return randomMember
     }
 
     fun dislike() {
@@ -54,5 +87,19 @@ class MemberViewModel : ViewModel() {
         _firstName.value = randomMember.firstname
         _lastName.value = randomMember.lastname
         _party.value = randomMember.party
+    }
+
+    private fun getEduskuntaMembers() {
+        viewModelScope.launch {
+            try {
+                val listResult = ParliamentApi.retrofitService.getMembers()
+
+                _response.value =
+                    "Success: ${listResult.size} Eduskunta members retrieved"
+                database.insertAll(listResult)
+            } catch (e: Exception) {
+                _response.value = "Failure: ${e.message}"
+            }
+        }
     }
 }

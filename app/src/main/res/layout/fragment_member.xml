@@ -12,6 +12,7 @@
         <variable
             name="memberViewModel"
             type="com.kml.parliamentapp.member.MemberViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,7 +38,7 @@
             android:layout_marginStart="140dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="3dp"
-            android:text="@{String.valueOf(memberViewModel.firstName)}"
+            android:text="@{memberViewModel.response}"
             app:layout_constraintEnd_toStartOf="@+id/lastNameTV"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
