@@ -46,7 +46,7 @@ class MemberListFragment : Fragment() {
 
         memberListViewModel.allMembers.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.data = it
+                adapter.submitList(it)
             }
         })
 
