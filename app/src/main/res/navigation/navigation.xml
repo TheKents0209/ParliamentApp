@@ -9,15 +9,22 @@
         android:id="@+id/titleFragment"
         android:name="com.kml.parliamentapp.title.TitleFragment"
         android:label="TitleFragment"
-        tools:layout="@layout/fragment_title"
-        >
+        tools:layout="@layout/fragment_title">
         <action
             android:id="@+id/action_titleFragment_to_parliamentMemberFragment"
             app:destination="@id/parliamentMemberFragment" />
+        <action
+            android:id="@+id/action_titleFragment_to_memberListFragment"
+            app:destination="@id/memberListFragment" />
     </fragment>
     <fragment
         android:id="@+id/parliamentMemberFragment"
         android:name="com.kml.parliamentapp.member.MemberFragment"
         android:label="ParliamentMemberFragment"
         tools:layout="@layout/fragment_member" />
+    <fragment
+        android:id="@+id/memberListFragment"
+        android:name="com.kml.parliamentapp.memberlist.MemberListFragment"
+        android:label="MemberListFragment"
+        tools:layout="@layout/fragment_member_list" />
 </navigation>

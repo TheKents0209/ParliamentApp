@@ -25,7 +25,7 @@ class TitleFragment : Fragment() {
             false
         )
         binding.randomButton.setOnClickListener { view: View ->
-            view.findNavController().navigate(R.id.action_titleFragment_to_parliamentMemberFragment)
+            view.findNavController().navigate(R.id.action_titleFragment_to_memberListFragment)
         }
         return binding.root
     }
