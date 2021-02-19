@@ -15,7 +15,7 @@ interface MembersDatabaseDao {
     suspend fun update(member: ParliamentMember)
 
     @Query("SELECT * FROM parliament_members_table WHERE hetekaId = :hetekaId")
-    suspend fun getById(hetekaId: Int): ParliamentMember?
+    suspend fun getMemberById(hetekaId: Int): ParliamentMember?
 
     @Query("SELECT * FROM parliament_members_table LIMIT 1")
     suspend fun getRandomMember(): ParliamentMember?

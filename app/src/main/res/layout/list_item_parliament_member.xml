@@ -8,11 +8,16 @@
         <variable
             name="member"
             type="com.kml.parliamentapp.database.ParliamentMember" />
+
+        <variable
+            name="clickListener"
+            type="com.kml.parliamentapp.memberlist.ParliamentMemberListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> clickListener.onClick(member)">
 
         <TextView
             android:id="@+id/member_fullnameTV"

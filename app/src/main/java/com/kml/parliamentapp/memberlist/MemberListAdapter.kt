@@ -1,17 +1,18 @@
 package com.kml.parliamentapp.memberlist
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.annotation.NonNull
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.kml.parliamentapp.R
 import com.kml.parliamentapp.database.ParliamentMember
 import androidx.recyclerview.widget.ListAdapter
+import com.kml.parliamentapp.R
 import com.kml.parliamentapp.databinding.ListItemParliamentMemberBinding
 
-class MemberListAdapter :
+class MemberListAdapter(val clickListener: ParliamentMemberListener) :
     ListAdapter<ParliamentMember, MemberListAdapter.ViewHolder>(ParliamentMemberDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -20,15 +21,20 @@ class MemberListAdapter :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item, clickListener)
+        holder.itemView.setOnClickListener { view: View ->
+            view.findNavController().navigate(
+                MemberListFragmentDirections.actionMemberListFragmentToParliamentMemberFragment(item.hetekaId)
+            )
+        }
     }
 
     class ViewHolder private constructor(val binding: ListItemParliamentMemberBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        val fullname: TextView = binding.memberFullnameTV
 
-        fun bind(item: ParliamentMember) {
+        fun bind(item: ParliamentMember, clickListener: ParliamentMemberListener) {
             binding.member = item
+            binding.clickListener = clickListener
         }
 
         companion object {
@@ -51,4 +57,8 @@ class ParliamentMemberDiffCallback : DiffUtil.ItemCallback<ParliamentMember>() {
         return oldItem == newItem
     }
 
+}
+
+class ParliamentMemberListener(val clickListener: (hetekaId: Int) -> Unit) {
+    fun onClick(member: ParliamentMember) = clickListener(member.hetekaId)
 }

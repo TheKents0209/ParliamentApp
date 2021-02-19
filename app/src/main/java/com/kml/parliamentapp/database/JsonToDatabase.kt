@@ -27,6 +27,7 @@ class JsonToDatabase(
                 val listResult = ParliamentApi.retrofitService.getMembers()
 
                 database.insertAll(listResult)
+                Log.i("JsonToDatabase", "Success ${listResult.size} inserted")
             } catch (e: Exception) {
                 Log.e("JsonToDatabase", "Error", e)
             }

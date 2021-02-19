@@ -7,12 +7,13 @@ import com.kml.parliamentapp.database.MembersDatabaseDao
 
 class MemberViewModelFactory(
     private val dataSource: MembersDatabaseDao,
-    private val application: Application
+    private val application: Application,
+    private val hetekaId: Int
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MemberViewModel::class.java)) {
-            return MemberViewModel(dataSource, application) as T
+            return MemberViewModel(dataSource, application, hetekaId) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
