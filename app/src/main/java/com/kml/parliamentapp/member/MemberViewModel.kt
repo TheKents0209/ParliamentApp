@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.kml.parliamentapp.database.*
 import com.kml.parliamentapp.formatMembers
+import com.kml.parliamentapp.models.ParliamentMember
 import com.kml.parliamentapp.network.ParliamentApi
 import com.squareup.moshi.Json
 import kotlinx.coroutines.launch
@@ -19,8 +20,6 @@ class MemberViewModel(
     application: Application,
     hetekaId: Int
 ) : AndroidViewModel(application) {
-
-    var randomMember = members.randomMember()
 
     private var parliamentMember = MutableLiveData<ParliamentMember?>()
 
@@ -100,14 +99,6 @@ class MemberViewModel(
 
     fun like() {
         _likes.value = (_likes.value)?.plus(1)
-    }
-
-    fun randomMember() {
-        randomMember = members.randomMember()
-        _likes.value = 0
-        _firstName.value = randomMember.firstname
-        _lastName.value = randomMember.lastname
-        _party.value = randomMember.party
     }
 
 //    private fun getEduskuntaMembers() {

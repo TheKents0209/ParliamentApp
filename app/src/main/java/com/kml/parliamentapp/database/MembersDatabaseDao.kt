@@ -2,6 +2,7 @@ package com.kml.parliamentapp.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.kml.parliamentapp.models.ParliamentMember
 
 @Dao
 interface MembersDatabaseDao {

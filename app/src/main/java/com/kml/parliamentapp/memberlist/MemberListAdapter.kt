@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.kml.parliamentapp.database.ParliamentMember
+import com.kml.parliamentapp.models.ParliamentMember
 import androidx.recyclerview.widget.ListAdapter
 import com.kml.parliamentapp.R
 import com.kml.parliamentapp.databinding.ListItemParliamentMemberBinding

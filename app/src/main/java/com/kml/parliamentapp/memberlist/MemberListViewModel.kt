@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.kml.parliamentapp.database.MembersDatabaseDao
-import com.kml.parliamentapp.database.ParliamentMember
+import com.kml.parliamentapp.models.ParliamentMember
 import com.kml.parliamentapp.formatMembers
 import javax.sql.DataSource
 

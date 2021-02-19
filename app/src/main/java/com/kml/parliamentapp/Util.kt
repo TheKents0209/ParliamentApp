@@ -7,7 +7,7 @@ import android.text.Spanned
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.kml.parliamentapp.database.ParliamentMember
+import com.kml.parliamentapp.models.ParliamentMember
 import java.lang.StringBuilder
 
 fun formatMembers(members: List<ParliamentMember>, resources: Resources): Spanned {

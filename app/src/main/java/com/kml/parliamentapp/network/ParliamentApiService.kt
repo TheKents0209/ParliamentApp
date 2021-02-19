@@ -1,6 +1,6 @@
 package com.kml.parliamentapp.network
 
-import com.kml.parliamentapp.database.ParliamentMember
+import com.kml.parliamentapp.models.ParliamentMember
 import retrofit2.Retrofit
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

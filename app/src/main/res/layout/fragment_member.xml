@@ -7,7 +7,7 @@
 
         <variable
             name="member"
-            type="com.kml.parliamentapp.database.ParliamentMember" />
+            type="com.kml.parliamentapp.models.ParliamentMember" />
 
         <variable
             name="memberViewModel"
@@ -91,9 +91,11 @@
             app:layout_constraintStart_toEndOf="@+id/likeButton"
             app:layout_constraintTop_toBottomOf="@+id/partyNameTV" />
 
+
+        <!-- android:onClick="@{() -> memberViewModel.randomMember()}" -->
+
         <Button
             android:id="@+id/randomMemberButton"
-            android:onClick="@{() -> memberViewModel.randomMember()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="96dp"

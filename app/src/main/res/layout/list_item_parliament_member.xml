@@ -7,7 +7,7 @@
 
         <variable
             name="member"
-            type="com.kml.parliamentapp.database.ParliamentMember" />
+            type="com.kml.parliamentapp.models.ParliamentMember" />
 
         <variable
             name="clickListener"

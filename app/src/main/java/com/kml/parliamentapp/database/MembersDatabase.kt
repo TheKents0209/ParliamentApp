@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.kml.parliamentapp.models.ParliamentMember
 
 @Database(entities = [ParliamentMember::class], version = 1, exportSchema = false)
 abstract class MembersDatabase : RoomDatabase() {
