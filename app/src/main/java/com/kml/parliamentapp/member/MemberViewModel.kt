@@ -59,20 +59,22 @@ class MemberViewModel(
 
     init {
         initializeParliamentMember(hetekaId)
-        _likes.value = 0
-//        _firstName.value = parliamentMember.value!!.firstname
-        _lastName.value = randomMember.lastname
-        _party.value = randomMember.party
         Log.i("MemberViewModel", "MemberViewModel created!")
         Log.i("MemberViewModel", "Clicked members id is $hetekaId")
     }
 
     private fun initializeParliamentMember(hetekaId: Int) {
         viewModelScope.launch {
-            parliamentMember.value = getMemberById(hetekaId)
-            Log.i("MemberViewModel", parliamentMember.value!!.fullname)
-            _fullName.value = parliamentMember.value?.fullname
-            _party.value = parliamentMember.value?.party
+            try {
+                parliamentMember.value = getMemberById(hetekaId)
+                Log.i("MemberViewModel", parliamentMember.value!!.fullname)
+                _fullName.value = parliamentMember.value?.fullname
+                _party.value = parliamentMember.value?.party
+                _likes.value = 0
+            } catch (e: Exception) {
+                Log.e("MemberViewModel", "Member initialization failed", e)
+            }
+
         }
     }
 

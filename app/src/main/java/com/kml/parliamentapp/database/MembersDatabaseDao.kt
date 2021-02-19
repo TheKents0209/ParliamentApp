@@ -14,6 +14,9 @@ interface MembersDatabaseDao {
     @Update
     suspend fun update(member: ParliamentMember)
 
+    @Query("DELETE FROM parliament_members_table")
+    fun clear()
+
     @Query("SELECT * FROM parliament_members_table WHERE hetekaId = :hetekaId")
     suspend fun getMemberById(hetekaId: Int): ParliamentMember?
 

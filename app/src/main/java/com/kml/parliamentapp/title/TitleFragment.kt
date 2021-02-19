@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.kml.parliamentapp.R
+import com.kml.parliamentapp.database.JsonToDatabase
+import com.kml.parliamentapp.database.MembersDatabase
 import com.kml.parliamentapp.databinding.FragmentTitleBinding
 
 class TitleFragment : Fragment() {
@@ -27,6 +29,13 @@ class TitleFragment : Fragment() {
         binding.randomButton.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_titleFragment_to_memberListFragment)
         }
+
+        val application = requireNotNull(this.activity).application
+        val dataSource = MembersDatabase.getInstance(application).membersDatabaseDao
+
+        val databaseConvert = JsonToDatabase(dataSource)
+
+        databaseConvert.convert()
         return binding.root
     }
 }

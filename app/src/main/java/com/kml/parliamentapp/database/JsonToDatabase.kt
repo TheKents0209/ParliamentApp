@@ -15,10 +15,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.lang.Exception
 
-//TODO: Make this class populate database instead
 class JsonToDatabase(
-    val database: MembersDatabaseDao,
-    application: Application
+    val database: MembersDatabaseDao
 ) {
 
     fun convert() {
