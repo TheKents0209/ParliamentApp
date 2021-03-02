@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.kml.parliamentapp.R
+import com.kml.parliamentapp.data.database.LikesDatabase
 import com.kml.parliamentapp.data.database.MemberDatabase
 import com.kml.parliamentapp.databinding.FragmentMemberBinding
 import com.kml.parliamentapp.ui.main.view.MemberFragmentArgs
@@ -37,7 +38,8 @@ class MemberFragment : Fragment() {
 
         // Create an instance of the ViewModel Factory.
         val dataSource = MemberDatabase.getInstance(application).membersDatabaseDao
-        val viewModelFactory = MemberViewModelFactory(dataSource,application, arguments.hetekaId)
+        val likesDataSource = LikesDatabase.getInstance(application).likesDatabaseDao
+        val viewModelFactory = MemberViewModelFactory(dataSource,likesDataSource,application, arguments.hetekaId)
         // Get a reference to the ViewModel associated with this fragment.
         val memberViewModel =
             ViewModelProvider(this, viewModelFactory).get(MemberViewModel::class.java)
