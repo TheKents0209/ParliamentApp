@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ParliamentApp</string>
+    <string name="app_name">Eduskunnan äänestys</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="picture_desc">Picture of selected member</string>
