@@ -9,12 +9,6 @@
          click handlers, and state variables. -->
     <data>
 
-        <variable
-            name="member"
-            type="com.kml.parliamentapp.data.model.ParliamentMember" />
-        <variable
-            name="memberListViewModel"
-            type="com.kml.parliamentapp.ui.main.viewmodel.MemberListViewModel" />
     </data>
 
     <!-- Start of the visible fragment layout using ConstraintLayout -->
@@ -23,10 +17,9 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/member_list"
+            android:id="@+id/party_list"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

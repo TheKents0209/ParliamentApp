@@ -7,24 +7,26 @@
 
         <variable
             name="member"
-            type="com.kml.parliamentapp.models.ParliamentMember" />
+            type="com.kml.parliamentapp.data.model.ParliamentMember" />
 
         <variable
             name="memberViewModel"
-            type="com.kml.parliamentapp.member.MemberViewModel" />
+            type="com.kml.parliamentapp.ui.main.viewmodel.MemberViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".member.MemberFragment">
+        tools:context=".ui.main.view.MemberFragment">
 
         <ImageView
             android:id="@+id/memberIV"
             android:layout_width="179dp"
             android:layout_height="183dp"
             android:layout_marginTop="68dp"
+            app:imageUrl="@{memberViewModel.member.pictureUrl}"
+            android:contentDescription="@string/picture_desc"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,35 +35,35 @@
 
         <TextView
             android:id="@+id/fullNameTV"
+            android:text="@{memberViewModel.member.fullname}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@{String.valueOf(memberViewModel.fullName)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/memberIV" />
 
         <Button
             android:id="@+id/dislikeButton"
-            android:onClick="@{() -> memberViewModel.dislike()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="88dp"
-            android:text="Dislike"
+            android:text="@string/dislike"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/likeAmountTV"
             app:layout_constraintTop_toBottomOf="@+id/partyNameTV" />
 
+
         <Button
             android:id="@+id/likeButton"
-            android:onClick="@{() -> memberViewModel.like()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="88dp"
             android:layout_marginTop="32dp"
-            android:text="Like"
+            android:text="@string/like"
+            android:onClick="@{() -> memberViewModel.likeParliamentMember()}"
             app:layout_constraintEnd_toStartOf="@+id/likeAmountTV"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -69,10 +71,10 @@
 
         <TextView
             android:id="@+id/partyNameTV"
+            android:text="@{memberViewModel.member.party}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:text="@{String.valueOf(memberViewModel.party)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
@@ -80,12 +82,12 @@
 
         <TextView
             android:id="@+id/likeAmountTV"
+            android:text="@{String.valueOf(memberViewModel.member.likes)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="48dp"
             android:layout_marginEnd="8dp"
-            android:text="@{String.valueOf(memberViewModel.likes)}"
             app:layout_constraintEnd_toStartOf="@+id/dislikeButton"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/likeButton"
@@ -99,9 +101,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="96dp"
-            android:text="Random"
+            android:text="@string/random"
+            android:onClick="@{() -> memberViewModel.randomMember()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
