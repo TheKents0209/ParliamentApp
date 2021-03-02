@@ -18,6 +18,7 @@ PartyDiffCallback()
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position), clickListener)
+        holder.binding.imageView.bindLogo(getItem(position))
     }
 
     class ViewHolder private constructor(val binding: ListItemPartiesBinding) :
