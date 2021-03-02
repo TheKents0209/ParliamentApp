@@ -1,30 +1,30 @@
-package com.kml.parliamentapp.database
+package com.kml.parliamentapp.data.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.kml.parliamentapp.models.ParliamentMember
+import com.kml.parliamentapp.data.model.ParliamentMember
 
-@Database(entities = [ParliamentMember::class], version = 1, exportSchema = false)
-abstract class MembersDatabase : RoomDatabase() {
+@Database(entities = [ParliamentMember::class], version = 3, exportSchema = false)
+abstract class MemberDatabase : RoomDatabase() {
 
-    abstract val membersDatabaseDao: MembersDatabaseDao
+    abstract val membersDatabaseDao: MemberDatabaseDao
 
     companion object {
 
         @Volatile
-        private var INSTANCE: MembersDatabase? = null
+        private var INSTANCE: MemberDatabase? = null
 
-        fun getInstance(context: Context): MembersDatabase {
+        fun getInstance(context: Context): MemberDatabase {
             synchronized(this) {
                 var instance = INSTANCE
 
                 if (instance == null) {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
-                        MembersDatabase::class.java,
-                        "parliament_member_database"
+                        MemberDatabase::class.java,
+                        "parliament_member_table"
                     )
                         .fallbackToDestructiveMigration()
                         .build()
