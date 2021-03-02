@@ -14,7 +14,7 @@ class MemberRepository(private val databaseDao: MemberDatabaseDao) {
 
     suspend fun refreshParliamentMembers() {
         withContext(Dispatchers.IO) {
-            val members = correctFullPartyNames(ParliamentApi.members.getMembers())
+            val members = ParliamentApi.members.getMembers()
             Log.i("MemberRepository", "Refreshed database with ${members.size} members")
             databaseDao.insertAll(members)
         }
@@ -42,38 +42,38 @@ class MemberRepository(private val databaseDao: MemberDatabaseDao) {
         return databaseDao.getParties()
     }
 
-    fun correctFullPartyNames(list: List<ParliamentMember>) : List<ParliamentMember> {
-        list.forEach{
-            if(it.party == "ps") {
-                it.party = "Perussuomalaiset"
-            }
-            if(it.party == "sd") {
-                it.party = "Suomen Sosialidemokraattinen Puolue"
-            }
-            if(it.party == "kok") {
-                it.party = "Kansallinen Kokoomus"
-            }
-            if(it.party == "vihr") {
-                it.party = "Vihreä liitto"
-            }
-            if(it.party == "vas") {
-                it.party = "Vasemmistoliitto"
-            }
-            if(it.party == "r") {
-                it.party = "Suomen ruotsalainen kansanpuolue"
-            }
-            if(it.party == "kesk") {
-                it.party = "Suomen Keskusta"
-            }
-            if(it.party == "kd") {
-                it.party = "Suomen Kristillisdemokraatit"
-            }
-            if(it.party == "liik") {
-                it.party = "Liike Nyt"
-            }
-        }
-        return list
-    }
+//    fun correctFullPartyNames(list: List<ParliamentMember>) : List<ParliamentMember> {
+//        list.forEach{
+//            if(it.party == "ps") {
+//                it.party = "Perussuomalaiset"
+//            }
+//            if(it.party == "sd") {
+//                it.party = "Suomen Sosialidemokraattinen Puolue"
+//            }
+//            if(it.party == "kok") {
+//                it.party = "Kansallinen Kokoomus"
+//            }
+//            if(it.party == "vihr") {
+//                it.party = "Vihreä liitto"
+//            }
+//            if(it.party == "vas") {
+//                it.party = "Vasemmistoliitto"
+//            }
+//            if(it.party == "r") {
+//                it.party = "Suomen ruotsalainen kansanpuolue"
+//            }
+//            if(it.party == "kesk") {
+//                it.party = "Suomen Keskusta"
+//            }
+//            if(it.party == "kd") {
+//                it.party = "Suomen Kristillisdemokraatit"
+//            }
+//            if(it.party == "liik") {
+//                it.party = "Liike Nyt"
+//            }
+//        }
+//        return list
+//    }
 
 
 //    suspend fun updateParliamentMember(member: ParliamentMember) {
