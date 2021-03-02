@@ -1,17 +1,21 @@
-package com.kml.parliamentapp.memberlist
+package com.kml.parliamentapp.ui.main.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.kml.parliamentapp.R
-import com.kml.parliamentapp.database.MembersDatabase
+import com.kml.parliamentapp.data.database.MemberDatabase
 import com.kml.parliamentapp.databinding.FragmentMemberListBinding
+import com.kml.parliamentapp.ui.main.adapter.MemberListAdapter
+import com.kml.parliamentapp.ui.base.MemberListViewModelFactory
+import com.kml.parliamentapp.ui.main.adapter.ParliamentMemberListener
+import com.kml.parliamentapp.ui.main.viewmodel.MemberListViewModel
 
 
 class MemberListFragment : Fragment() {
@@ -21,16 +25,17 @@ class MemberListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_member_list, container, false
         )
 
         val application = requireNotNull(this.activity).application
+        val arguments = MemberListFragmentArgs.fromBundle(requireArguments())
 
-        val dataSource = MembersDatabase.getInstance(application).membersDatabaseDao
-        val viewModelFactory = MemberListViewModelFactory(dataSource, application)
+        val viewModelFactory = MemberListViewModelFactory(MemberDatabase.getInstance(application).membersDatabaseDao, application, arguments.party)
 
         val memberListViewModel =
             ViewModelProvider(
@@ -39,21 +44,29 @@ class MemberListFragment : Fragment() {
 
         binding.memberListViewModel = memberListViewModel
 
-        binding.lifecycleOwner = this
+        binding.setLifecycleOwner(this)
 
         val adapter = MemberListAdapter(ParliamentMemberListener { hetekaId ->
-            Toast.makeText(context, "${hetekaId}", Toast.LENGTH_LONG).show()
+            memberListViewModel.onParliamentMemberClicked(hetekaId)
         })
 
         binding.memberList.adapter = adapter
 
-        memberListViewModel.allMembers.observe(viewLifecycleOwner, Observer {
+        memberListViewModel.parliamentMembers.observe(viewLifecycleOwner, {
             it?.let {
                 adapter.submitList(it)
             }
         })
 
-        binding.setLifecycleOwner(this)
+        memberListViewModel.navigateToParliamentMemberDetails.observe(viewLifecycleOwner, { member ->
+            member?.let {
+
+                this.findNavController().navigate(
+                    MemberListFragmentDirections
+                        .actionMemberListFragmentToParliamentMemberFragment(member))
+                memberListViewModel.onParliamentMemberDetailsNavigated()
+            }
+        })
 
         return binding.root
     }

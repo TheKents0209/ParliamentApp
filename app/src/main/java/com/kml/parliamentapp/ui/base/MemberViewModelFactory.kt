@@ -1,19 +1,21 @@
-package com.kml.parliamentapp.member
+package com.kml.parliamentapp.ui.base
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.kml.parliamentapp.database.MembersDatabaseDao
+import com.kml.parliamentapp.data.database.MemberDatabaseDao
+import com.kml.parliamentapp.data.repository.MemberRepository
+import com.kml.parliamentapp.ui.main.viewmodel.MemberViewModel
 
 class MemberViewModelFactory(
-    private val dataSource: MembersDatabaseDao,
+    private val databaseDao: MemberDatabaseDao,
     private val application: Application,
-    private val hetekaId: Int
+    private val hetekaIdKey: Int
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MemberViewModel::class.java)) {
-            return MemberViewModel(dataSource, application, hetekaId) as T
+            return MemberViewModel(MemberRepository(databaseDao), hetekaIdKey) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

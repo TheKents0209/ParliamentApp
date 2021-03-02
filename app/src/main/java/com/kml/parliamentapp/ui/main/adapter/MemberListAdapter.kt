@@ -1,32 +1,23 @@
-package com.kml.parliamentapp.memberlist
+package com.kml.parliamentapp.ui.main.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.kml.parliamentapp.models.ParliamentMember
+import com.kml.parliamentapp.data.model.ParliamentMember
 import androidx.recyclerview.widget.ListAdapter
-import com.kml.parliamentapp.R
 import com.kml.parliamentapp.databinding.ListItemParliamentMemberBinding
 
-class MemberListAdapter(val clickListener: ParliamentMemberListener) :
-    ListAdapter<ParliamentMember, MemberListAdapter.ViewHolder>(ParliamentMemberDiffCallback()) {
+class MemberListAdapter(val clickListener: ParliamentMemberListener) : ListAdapter<ParliamentMember, MemberListAdapter.ViewHolder>(
+    ParliamentMemberDiffCallback()
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
-        holder.bind(item, clickListener)
-        holder.itemView.setOnClickListener { view: View ->
-            view.findNavController().navigate(
-                MemberListFragmentDirections.actionMemberListFragmentToParliamentMemberFragment(item.hetekaId)
-            )
-        }
+        holder.bind(getItem(position), clickListener)
     }
 
     class ViewHolder private constructor(val binding: ListItemParliamentMemberBinding) :
@@ -35,6 +26,7 @@ class MemberListAdapter(val clickListener: ParliamentMemberListener) :
         fun bind(item: ParliamentMember, clickListener: ParliamentMemberListener) {
             binding.member = item
             binding.clickListener = clickListener
+            binding.executePendingBindings()
         }
 
         companion object {
@@ -45,6 +37,8 @@ class MemberListAdapter(val clickListener: ParliamentMemberListener) :
             }
         }
     }
+
+
 
 }
 
