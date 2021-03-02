@@ -32,7 +32,6 @@ class MemberListViewModel(private val memberRepository: MemberRepository, party:
     get() = _isNetworkErrorShown
 
 
-
     val parliamentMembers = memberRepository.getParliamentMembersByParty(party)
 
     private fun fetchParliamentMemberByParty(party: String) {
