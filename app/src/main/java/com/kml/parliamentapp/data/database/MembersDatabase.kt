@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.kml.parliamentapp.data.model.ParliamentMember
 
-@Database(entities = [ParliamentMember::class], version = 3, exportSchema = false)
+@Database(entities = [ParliamentMember::class], version = 4, exportSchema = false)
 abstract class MemberDatabase : RoomDatabase() {
 
     abstract val membersDatabaseDao: MemberDatabaseDao
