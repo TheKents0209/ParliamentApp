@@ -1,4 +1,4 @@
-package com.kml.parliamentapp.models
+package com.kml.parliamentapp.data.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -10,7 +10,7 @@ data class ParliamentMember(
     val hetekaId: Int,
 
     @ColumnInfo(name = "seat_number")
-    val seatNumber: Int = 0,
+    val seatNumber: Int,
 
     @ColumnInfo(name = "last_name")
     var lastname: String,
@@ -25,9 +25,11 @@ data class ParliamentMember(
     var party: String,
 
     @ColumnInfo(name = "minister")
-    val minister: Boolean = false,
+    val minister: Boolean,
 
     @ColumnInfo(name = "picture_url")
-    val pictureUrl: String = ""
-) {
-}
+    val pictureUrl: String = "",
+
+    @ColumnInfo(name = "likes_amount")
+    var likes: Int = 0
+)
