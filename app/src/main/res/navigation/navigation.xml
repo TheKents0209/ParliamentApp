@@ -3,20 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/titleFragment">
+    app:startDestination="@id/partyListFragment">
 
     <fragment
-        android:id="@+id/titleFragment"
-        android:name="com.kml.parliamentapp.title.TitleFragment"
-        android:label="TitleFragment"
-        tools:layout="@layout/fragment_title">
-        <action
-            android:id="@+id/action_titleFragment_to_memberListFragment"
-            app:destination="@id/memberListFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/parliamentMemberFragment"
-        android:name="com.kml.parliamentapp.member.MemberFragment"
+        android:name="com.kml.parliamentapp.ui.main.view.MemberFragment"
         android:label="ParliamentMemberFragment"
         tools:layout="@layout/fragment_member">
         <argument
@@ -25,11 +16,23 @@
     </fragment>
     <fragment
         android:id="@+id/memberListFragment"
-        android:name="com.kml.parliamentapp.memberlist.MemberListFragment"
+        android:name="com.kml.parliamentapp.ui.main.view.MemberListFragment"
         android:label="MemberListFragment"
         tools:layout="@layout/fragment_member_list">
         <action
             android:id="@+id/action_memberListFragment_to_parliamentMemberFragment"
             app:destination="@id/parliamentMemberFragment" />
+        <argument
+            android:name="party"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/partyListFragment"
+        android:name="com.kml.parliamentapp.ui.main.view.PartyListFragment"
+        android:label="PartyListFragment"
+        tools:layout="@layout/fragment_party_list">
+        <action
+            android:id="@+id/action_partyListFragment_to_memberListFragment"
+            app:destination="@id/memberListFragment" />
     </fragment>
 </navigation>
