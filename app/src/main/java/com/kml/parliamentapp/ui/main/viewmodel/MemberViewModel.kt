@@ -2,12 +2,18 @@ package com.kml.parliamentapp.ui.main.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.*
+import com.kml.parliamentapp.data.model.Likes
 import com.kml.parliamentapp.data.model.ParliamentMember
+import com.kml.parliamentapp.data.repository.LikesRepository
 import com.kml.parliamentapp.data.repository.MemberRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MemberViewModel(
     private val memberRepository: MemberRepository,
+    private val likesRepository: LikesRepository,
     hetekaIdKey: Int
 ) : ViewModel() {
 
@@ -16,50 +22,64 @@ class MemberViewModel(
     val member: LiveData<LiveData<ParliamentMember>>
     get() = _member
 
+    private var _likes = MutableLiveData<LiveData<Likes>>()
+    val likes: LiveData<LiveData<Likes>>
+    get() = _likes
+
     init {
         _member.value = memberRepository.getParliamentMemberWithId(hetekaIdKey)
+        viewModelScope.launch {
+            _likes.value = likesRepository.getLikesForParliamentMember(hetekaIdKey)
+        }
     }
 
 
-    //TODO: Partial update implementation
     fun likeParliamentMember() {
         viewModelScope.launch {
-            val memberLikeAmount = member.value?.value?.likes
-            val memberNewLikeAmount = memberLikeAmount?.plus(1) ?: 0
-
-            if(member.value != null) {
-                val mParliamentMember = member.value?.value?.let {
-                    ParliamentMember(
-                        it.hetekaId,
-                        it.seatNumber,
-                        it.lastname,
-                        it.firstname,
-                        it.fullname,
-                        it.party,
-                        it.minister,
-                        it.pictureUrl,
-                        memberNewLikeAmount
-                    )
-                }
-                if (mParliamentMember != null) {
-                    memberRepository.updateParliamentMember(mParliamentMember)
-                    Log.i("MemberViewModel", "member liked")
-                } else {
-                    Log.i("MemberViewModel", "member was null")
-                }
-            }
+            _member.value?.value?.let { likesRepository.likeParliamentMember(it.hetekaId) }
         }
     }
-    //TODO:Dislike member
-
-    fun randomMember() {
+    fun dislikeParliamentMember() {
         viewModelScope.launch {
-            Log.i("MemberViewModel", "randomMember method launced")
-            Log.i("MemberViewModel", "currect picked member is ${member.value?.value?.hetekaId}")
-              _member.value = memberRepository.getRandomMember()
-            Log.i("MemberViewModel", "new picked member is ${member.value?.value?.hetekaId}")
+            _member.value?.value?.let { likesRepository.dislikeParliamentMember(it.hetekaId) }
         }
     }
+
+//   fun randomMember() {
+//       Log.i("MemberViewModel", "Currect picked members id is ${member.value?.value?.hetekaId}")
+//       _member.value = memberRepository.getRandomMember()
+//       Log.i("MemberViewModel", "getRandomMember executed")
+//       viewModelScope.launch {
+//           Log.i("MemberViewModel", "in viewmodelScope")
+//           if(_member.value?.value?.hetekaId != null) {
+//               Log.i("MemberViewModel", "ID wasn't null")
+//               _member.value?.value?.let { getLikesNewMember(it.hetekaId) }
+//           }else{
+//               Log.i("MemberViewModel", "ID was null")
+//           }
+//       }
+//       Log.i("MemberViewModel", "New picked members id is ${member.value?.value?.hetekaId}")
+
+//       GlobalScope.launch(Dispatchers.IO) {
+//           Log.i("MemberViewModel", "currect picked member is ${member.value?.value?.hetekaId}")
+//           _member.value = memberRepository.getRandomMember()
+//           delay(1000)
+//           Log.i("MemberViewModel", "new picked member is ${member.value?.value?.hetekaId}")
+//       }
+//        viewModelScope.launch {
+//            Log.i("MemberViewModel", "randomMember method launced")
+//
+//        }
+//        viewModelScope.launch {
+//
+//            if(_member.value?.value?.hetekaId != null) {
+//                _likes.value = likesRepository.getLikesForParliamentMember(_member.value!!.value!!.hetekaId)
+//            }
+//        }
+//    }
+//    suspend fun getLikesNewMember(id: Int) {
+//        _likes.value = likesRepository.getLikesForParliamentMember(id)
+//    }
 
 //  fun likeParliamentMember() {
 //  viewModelScope.launch {
