@@ -28,8 +28,5 @@ data class ParliamentMember(
     val minister: Boolean,
 
     @ColumnInfo(name = "picture_url")
-    val pictureUrl: String = "",
-
-    @ColumnInfo(name = "likes_amount")
-    var likes: Int = 0
+    val pictureUrl: String = ""
 )
