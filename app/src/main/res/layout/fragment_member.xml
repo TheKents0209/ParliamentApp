@@ -72,7 +72,7 @@
 
         <TextView
             android:id="@+id/partyNameTV"
-            android:text="@{memberViewModel.member.party}"
+            app:partyNameMember="@{String.valueOf(memberViewModel.member.party)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
