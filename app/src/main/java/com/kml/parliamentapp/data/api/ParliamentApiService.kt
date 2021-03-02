@@ -1,6 +1,6 @@
-package com.kml.parliamentapp.network
+package com.kml.parliamentapp.data.api
 
-import com.kml.parliamentapp.models.ParliamentMember
+import com.kml.parliamentapp.data.model.ParliamentMember
 import retrofit2.Retrofit
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -20,14 +20,17 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .build()
 
+
 interface ParliamentApiService {
     @GET("eduskunta")
-    suspend fun getMembers():
-            List<ParliamentMember>
+    suspend fun getMembers(): List<ParliamentMember>
 }
 
 object ParliamentApi {
-    val retrofitService: ParliamentApiService by lazy {
-        retrofit.create(ParliamentApiService::class.java)
-    }
+
+//    val retrofitService: ParliamentApiService by lazy {
+//        retrofit.create(ParliamentApiService::class.java)
+//    }
+
+    val members: ParliamentApiService = retrofit.create(ParliamentApiService::class.java)
 }
