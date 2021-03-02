@@ -15,6 +15,7 @@ class MemberRepository(private val databaseDao: MemberDatabaseDao) {
     suspend fun refreshParliamentMembers() {
         withContext(Dispatchers.IO) {
             val members = correctFullPartyNames(ParliamentApi.members.getMembers())
+            Log.i("MemberRepository", "Refreshed database with ${members.size} members")
             databaseDao.insertAll(members)
         }
     }
