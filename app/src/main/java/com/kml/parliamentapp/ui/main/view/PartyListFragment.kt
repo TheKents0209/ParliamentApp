@@ -1,5 +1,12 @@
 package com.kml.parliamentapp.ui.main.view
 
+/*
+* 03.03.2021
+* Kenert Lauri
+* 2008815
+* Inflates layout, creates viewModel, sets partyList adapter, and observers for viewmodel values
+* */
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater

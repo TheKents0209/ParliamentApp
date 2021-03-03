@@ -1,5 +1,12 @@
 package com.kml.parliamentapp.data.database
 
+/*
+* 03.03.2021
+* Kenert Lauri
+* 2008815
+* Builds database for ParliamentMember class
+* */
+
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room

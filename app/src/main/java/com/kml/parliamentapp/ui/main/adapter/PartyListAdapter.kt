@@ -1,5 +1,12 @@
 package com.kml.parliamentapp.ui.main.adapter
 
+/*
+* 03.03.2021
+* Kenert Lauri
+* 2008815
+* RecyclerView adapter for List of parties
+* */
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil

@@ -1,5 +1,12 @@
 package com.kml.parliamentapp.ui.main.viewmodel
 
+/*
+* 03.03.2021
+* Kenert Lauri
+* 2008815
+* ViewModel gets list of parliament members from repo and provides that info for fragment
+* */
+
 import android.util.Log
 import androidx.lifecycle.*
 import com.kml.parliamentapp.data.model.Likes

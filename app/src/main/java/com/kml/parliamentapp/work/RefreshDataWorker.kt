@@ -1,5 +1,12 @@
 package com.kml.parliamentapp.work
 
+/*
+* 03.03.2021
+* Kenert Lauri
+* 2008815
+* Setups work, work calls MemberRepository method to refresh/fill database with members
+* */
+
 import android.content.Context
 import android.util.Log
 import androidx.work.CoroutineWorker

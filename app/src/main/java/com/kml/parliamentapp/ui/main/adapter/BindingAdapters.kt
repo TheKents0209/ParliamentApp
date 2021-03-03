@@ -1,5 +1,15 @@
 package com.kml.parliamentapp.ui.main.adapter
 
+/*
+* 03.03.2021
+* Kenert Lauri
+* 2008815
+* BindingAdapters that are being called from xml when value is used,
+* has methods to insert images to MemberFragment,
+* setting image resource using party.party if String is same,
+* setting party full name from shortened version for PartyList and MemberFragment
+* */
+
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView

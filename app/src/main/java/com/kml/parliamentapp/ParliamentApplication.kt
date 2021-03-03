@@ -1,5 +1,12 @@
 package com.kml.parliamentapp
 
+/*
+* 03.03.2021
+* Kenert Lauri
+* 2008815
+* Overrides Applications onCreate to call custom method that setups worker
+* */
+
 import android.app.Application
 import android.util.Log
 import androidx.work.*
@@ -35,14 +42,5 @@ class ParliamentApplication : Application() {
             RefreshDataWorker.RefreshDatabase,
             ExistingPeriodicWorkPolicy.KEEP,
             repeatingRequest)
-    }
-
-    private fun setupDatabaseInit() {
-        Log.i("ParliamentApplication", "setupDatabaseInit run")
-
-        val buildRequest = OneTimeWorkRequestBuilder<RefreshDataWorker>().setConstraints(constraints).build()
-
-        WorkManager.getInstance().enqueueUniqueWork(RefreshDataWorker.RefreshDatabase,
-        ExistingWorkPolicy.REPLACE, buildRequest)
     }
 }

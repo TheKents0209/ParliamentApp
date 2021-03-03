@@ -1,5 +1,12 @@
 package com.kml.parliamentapp.ui.main.view
 
+/*
+* 03.03.2021
+* Kenert Lauri
+* 2008815
+* Inflates layout, gets arguments, creates viewModel
+* */
+
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment

@@ -1,5 +1,12 @@
 package com.kml.parliamentapp.data.database
 
+/*
+* 03.03.2021
+* Kenert Lauri
+* 2008815
+* Needed Querys for searching LikesDatabase
+* */
+
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.kml.parliamentapp.data.model.Likes

@@ -1,5 +1,12 @@
 package com.kml.parliamentapp.data.repository
 
+/*
+* 03.03.2021
+* Kenert Lauri
+* 2008815
+* Repository that is linked to LikesDatabaseDao and includes methods for database search
+* */
+
 import androidx.lifecycle.LiveData
 import com.kml.parliamentapp.data.api.ParliamentApi
 import com.kml.parliamentapp.data.database.LikesDatabaseDao

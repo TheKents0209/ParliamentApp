@@ -1,5 +1,12 @@
 package com.kml.parliamentapp.ui.base
 
+/*
+* 03.03.2021
+* Kenert Lauri
+* 2008815
+* Creates new ViewModel for MemberFragment
+* */
+
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
