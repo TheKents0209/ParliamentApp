@@ -8,16 +8,12 @@ package com.kml.parliamentapp.data.repository
 * */
 
 import androidx.lifecycle.LiveData
-import com.kml.parliamentapp.data.api.ParliamentApi
 import com.kml.parliamentapp.data.database.LikesDatabaseDao
 import com.kml.parliamentapp.data.model.Likes
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class LikesRepository(private val databaseDao: LikesDatabaseDao) {
 
+    //Returns current member like count, if that member doesn't have entry in database, creates a new entry with value 0
     suspend fun getLikesForParliamentMember(id: Int): LiveData<Likes> {
         var memberLikes = databaseDao.getLikes(id)
         if(memberLikes.value?.hetekaId == null) {
@@ -26,9 +22,11 @@ class LikesRepository(private val databaseDao: LikesDatabaseDao) {
         }
         return memberLikes
     }
+
     suspend fun likeParliamentMember(id: Int) {
         databaseDao.likeMember(id)
     }
+
     suspend fun dislikeParliamentMember(id: Int) {
         databaseDao.dislikeMember(id)
     }

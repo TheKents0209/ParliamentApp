@@ -7,7 +7,6 @@ package com.kml.parliamentapp.ui.base
 * Creates new ViewModel for MemberFragment
 * */
 
-import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.kml.parliamentapp.data.database.LikesDatabaseDao
@@ -19,7 +18,6 @@ import com.kml.parliamentapp.ui.main.viewmodel.MemberViewModel
 class MemberViewModelFactory(
     private val databaseDao: MemberDatabaseDao,
     private val likesDatabaseDao: LikesDatabaseDao,
-    private val application: Application,
     private val hetekaIdKey: Int
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")

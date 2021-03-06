@@ -35,3 +35,5 @@ interface ParliamentApiService {
 object ParliamentApi {
     val members: ParliamentApiService = retrofit.create(ParliamentApiService::class.java)
 }
+
+enum class ParliamentApiStatus {LOADING, DONE}

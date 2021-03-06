@@ -11,22 +11,16 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.kml.parliamentapp.data.model.ParliamentMember
 import com.kml.parliamentapp.data.model.Party
-import kotlinx.android.synthetic.main.fragment_member.view.*
 
 @Dao
 interface MemberDatabaseDao {
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    suspend fun insert(member: ParliamentMember)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(list: List<ParliamentMember>)
 
     @Update
     suspend fun update(member: ParliamentMember)
-//
-//    @Query("DELETE FROM parliament_members_table")
-//    fun clear()
-//
+
     @Query("SELECT * FROM parliament_members_table WHERE hetekaId = :hetekaId")
     fun getMemberById(hetekaId: Int): LiveData<ParliamentMember>
 

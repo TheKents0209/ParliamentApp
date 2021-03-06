@@ -9,7 +9,6 @@ package com.kml.parliamentapp.ui.base
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.kml.parliamentapp.ParliamentApplication
 import com.kml.parliamentapp.R
 
 class MainActivity : AppCompatActivity() {

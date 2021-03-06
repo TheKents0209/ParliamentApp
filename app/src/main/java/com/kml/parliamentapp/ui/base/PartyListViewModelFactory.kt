@@ -7,19 +7,16 @@ package com.kml.parliamentapp.ui.base
 * Creates new ViewModel for PartyListFragment
 * */
 
-import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.kml.parliamentapp.data.database.MemberDatabaseDao
 import com.kml.parliamentapp.data.repository.MemberRepository
 import com.kml.parliamentapp.ui.main.viewmodel.PartyListViewModel
 
-@Suppress("UNCHECKED_CAST")
 class PartyListViewModelFactory(
-    private val databaseDao: MemberDatabaseDao,
-    private val application: Application
+    private val databaseDao: MemberDatabaseDao
 ) : ViewModelProvider.Factory {
-
+    @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(PartyListViewModel::class.java)) {
             return PartyListViewModel(MemberRepository(databaseDao)) as T

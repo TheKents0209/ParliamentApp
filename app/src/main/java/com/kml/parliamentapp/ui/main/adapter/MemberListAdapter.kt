@@ -15,7 +15,7 @@ import com.kml.parliamentapp.data.model.ParliamentMember
 import androidx.recyclerview.widget.ListAdapter
 import com.kml.parliamentapp.databinding.ListItemParliamentMemberBinding
 
-class MemberListAdapter(val clickListener: ParliamentMemberListener) : ListAdapter<ParliamentMember, MemberListAdapter.ViewHolder>(
+class MemberListAdapter(private val clickListener: ParliamentMemberListener) : ListAdapter<ParliamentMember, MemberListAdapter.ViewHolder>(
     ParliamentMemberDiffCallback()
 ) {
 
@@ -23,6 +23,7 @@ class MemberListAdapter(val clickListener: ParliamentMemberListener) : ListAdapt
         return ViewHolder.from(parent)
     }
 
+    //Called by RecyclerView to display the data at the specified position.
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position), clickListener)
     }
@@ -30,6 +31,7 @@ class MemberListAdapter(val clickListener: ParliamentMemberListener) : ListAdapt
     class ViewHolder private constructor(val binding: ListItemParliamentMemberBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        //Binds XML items
         fun bind(item: ParliamentMember, clickListener: ParliamentMemberListener) {
             binding.member = item
             binding.clickListener = clickListener
@@ -44,12 +46,11 @@ class MemberListAdapter(val clickListener: ParliamentMemberListener) : ListAdapt
             }
         }
     }
-
-
-
 }
 
+//ListAdapter diffs the new list against the old one and detects items that were added, removed, moved, or changed.
 class ParliamentMemberDiffCallback : DiffUtil.ItemCallback<ParliamentMember>() {
+
     override fun areItemsTheSame(oldItem: ParliamentMember, newItem: ParliamentMember): Boolean {
         return oldItem.hetekaId == newItem.hetekaId
     }
@@ -57,7 +58,6 @@ class ParliamentMemberDiffCallback : DiffUtil.ItemCallback<ParliamentMember>() {
     override fun areContentsTheSame(oldItem: ParliamentMember, newItem: ParliamentMember): Boolean {
         return oldItem == newItem
     }
-
 }
 
 class ParliamentMemberListener(val clickListener: (hetekaId: Int) -> Unit) {

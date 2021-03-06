@@ -8,7 +8,6 @@ package com.kml.parliamentapp
 * */
 
 import android.app.Application
-import android.util.Log
 import androidx.work.*
 import com.kml.parliamentapp.work.RefreshDataWorker
 import kotlinx.coroutines.CoroutineScope
@@ -19,8 +18,6 @@ import java.util.concurrent.TimeUnit
 class ParliamentApplication : Application() {
 
     private val applicationScope = CoroutineScope(Dispatchers.Default)
-    private val constraints = Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
-
 
     override fun onCreate() {
         super.onCreate()
@@ -34,9 +31,8 @@ class ParliamentApplication : Application() {
     }
 
     private fun setupRecurringWork() {
-        Log.i("ParliamentApplication", "setupRecurringWork run")
-
-        val repeatingRequest = PeriodicWorkRequestBuilder<RefreshDataWorker>(15, TimeUnit.MINUTES).setConstraints(constraints).build()
+        val constraints = Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
+        val repeatingRequest = PeriodicWorkRequestBuilder<RefreshDataWorker>(1, TimeUnit.DAYS).setConstraints(constraints).build()
 
         WorkManager.getInstance().enqueueUniquePeriodicWork(
             RefreshDataWorker.RefreshDatabase,

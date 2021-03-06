@@ -14,11 +14,14 @@ import com.kml.parliamentapp.data.repository.MemberRepository
 
 class PartyListViewModel(memberRepository: MemberRepository) : ViewModel() {
 
+    //LiveData values that come from repository
     val parties = memberRepository.getParties()
+    val status = memberRepository.status
 
     private val _navigateToPartySelected = MutableLiveData<String>()
     val navigateToPartySelected: LiveData<String>
         get() = _navigateToPartySelected
+
 
     fun onPartyClicked(party: String) {
         _navigateToPartySelected.value = party
