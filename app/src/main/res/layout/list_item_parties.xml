@@ -12,11 +12,9 @@
         <variable
             name="clickListener"
             type="com.kml.parliamentapp.ui.main.adapter.PartyListener" />
-
-        <variable
-            name="partyViewModel"
-            type="com.kml.parliamentapp.ui.main.viewmodel.PartyListViewModel" />
     </data>
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -48,7 +46,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
             app:partyName="@{party}" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
